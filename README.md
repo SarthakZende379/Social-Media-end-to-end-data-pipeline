@@ -9,7 +9,7 @@ This project evolved through three phases:
 2. Data Analysis and Visualization Implementation
 3. Interactive Dashboard Creation
 
-### Current Statistics (Nov 1 - Dec 12, 2024)
+### Data Collection Statistics (Nov 1 - Dec 12, 2024)
 - **4chan Posts:** 4.6 million
 - **Reddit Comments:** 1.2 million
 - **Reddit Posts:** 20,000
@@ -20,20 +20,49 @@ This project evolved through three phases:
 ```
 .
 ├── 4chan-crawler-SarthakZende379/    # 4chan data collection module
-│   ├── chan_client.py               # API client implementation
-│   ├── chan_crawler.py              # Main crawler
-│   ├── cold_start_board.py          # Crawler initialization
-│   └── ...
+│   ├── chan_client.py               # 4chan API client implementation
+│   ├── chan_crawler.py              # Main crawler implementation
+│   ├── cold_start_board.py          # Initialize crawler for new board
+│   ├── 4chan_plots.py               # Data visualization scripts
+│   └── requirements.txt             # Python dependencies
+│
 ├── reddit-crawler-SarthakZende379/   # Reddit data collection module
-│   ├── reddit_client.py             # API client
-│   ├── reddit_crawler.py            # Main crawler
-│   ├── historical_toxicity.py       # Toxicity processor
-│   └── ...
-└── website/                         # Analysis dashboard
-    ├── app.py                       # Flask application
-    └── templates/                   # Frontend views
+│   ├── reddit_client.py             # Reddit API client implementation
+│   ├── reddit_crawler.py            # Main crawler implementation
+│   ├── cold_start_subreddit.py      # Initialize crawler for subreddits
+│   ├── reddit_plots.py              # Data visualization scripts
+│   ├── historical_toxicity.py       # Toxicity analysis processor
+│   ├── config.json                  # Configuration settings
+│   └── requirements.txt             # Python dependencies
+│
+├── website/                          # Web dashboard implementation
+│   ├── app.py                       # Flask application
+│   ├── requirements.txt             # Python dependencies
+│   ├── static/                      # Static assets
+│   ├── templates/                   # HTML templates
+│   │   └── index.html              # Dashboard template
+│   └── logs/                        # Application logs
+│
+├── Project_Report.pdf
+└── README.md
 ```
 
+## Key Analysis Insights
+1. **Activity Patterns**
+   - Significant activity spike across platforms on Election Day (Nov 6)
+   - 4chan shows more volatile daily fluctuations (~250,000 peak posts)
+   - Reddit demonstrates more stable engagement patterns
+
+2. **Content Analysis**
+   - Only 3% of Reddit comments flagged as toxic (threshold ≥ 0.7)
+   - Higher comment volumes during election events maintained similar toxicity ratios
+   - Platform-specific topic trends visible through word frequency analysis
+
+3. **Research Focus**
+   - Comparative platform behavior during political events
+   - Moderation effectiveness analysis
+   - Evolution of discussion themes over time
+     
 ## Technical Implementation
 
 ### Data Collection Infrastructure
@@ -66,51 +95,104 @@ This project evolved through three phases:
 
 ## Setup Instructions
 
-### 1. Environment Setup
-1. Clone the repository:
-   ```bash
-   git clone [repository-url]
-   cd [repository-name]
-   ```
+### 1. Start Required Services
 
-2. Install dependencies:
-   ```bash
-   pip install -r website/requirements.txt
-   ```
-
-### 2. Service Configuration
-1. Start required services:
+1. Start MongoDB:
    ```bash
    docker start mongodb
+   ```
+
+2. Start Faktory:
+   ```bash
    docker start faktory
    ```
 
-2. Port Forwarding (if remote):
+3. Verify services are running:
    ```bash
-   ssh -L 27017:localhost:27017 username@<VM_IP>  # MongoDB
-   ssh -L 7420:localhost:7420 username@<VM_IP>    # Faktory Dashboard
-   ssh -L 5000:localhost:5000 username@<VM_IP>    # Web Dashboard
+   docker ps
    ```
 
-### 3. Data Collection
+### 2. Set Up Port Forwarding (if accessing remotely)
+
+1. MongoDB port forwarding:
+   ```bash
+   ssh -L 27017:localhost:27017 username@<VM_IP_ADDRESS>
+   ```
+
+2. Faktory Dashboard port forwarding:
+   ```bash
+   ssh -L 7420:localhost:7420 username@<VM_IP_ADDRESS>
+   ```
+   Access Faktory dashboard at: http://localhost:7420
+
+3. Website port forwarding:
+   ```bash
+   ssh -L 5000:localhost:5000 username@<VM_IP_ADDRESS>
+   ```
+
+### 3. Data Collection Setup
+
 1. Start 4chan Crawler:
    ```bash
    cd 4chan-crawler-SarthakZende379
-   python cold_start_board.py pol
-   python chan_crawler.py
+   source ../env/bin/activate
+   python cold_start_board.py pol    # Initialize crawler
+   python chan_crawler.py            # Run continuous crawler
    ```
 
 2. Start Reddit Crawler:
    ```bash
    cd reddit-crawler-SarthakZende379
-   python cold_start_subreddit.py
-   python reddit_crawler.py
+   source ../env/bin/activate
+   python cold_start_subreddit.py    # Initialize crawler
+   python reddit_crawler.py          # Run continuous crawler
    ```
 
-### 4. Dashboard Access
-- MongoDB Compass: `mongodb://localhost:27017`
-- Faktory Dashboard: http://localhost:7420
-- Analysis Dashboard: http://localhost:5000
+### 4. Run the Dashboard
+
+1. Install required dependencies:
+   ```bash
+   cd website
+   pip install -r requirements.txt
+   ```
+
+2. Start the Flask application:
+   ```bash
+   python app.py
+   ```
+
+3. Access the dashboard at http://localhost:5000
+
+## Data Requirements
+
+- MongoDB database with collections:
+  - reddit_crawler.reddit_comments
+  - chan_crawler.4chan_posts
+- Date range: November 1-14, 2024
+- Toxicity scores for Reddit comments (Nov 1-7)
+
+## Implementation Notes
+
+- Backend: Flask, MongoDB
+- Frontend: Bootstrap, Plotly.js
+- Real-time data processing
+- Interactive visualizations
+- Error handling and loading states
+
+## Accessing Tools
+
+1. MongoDB Compass:
+   - Connect using: `mongodb://localhost:27017`
+
+2. Faktory Dashboard:
+   - Access at: http://localhost:7420
+
+3. Analysis Dashboard:
+   - Access at: http://localhost:5000
+
+## Team
+
+Binary Bandits - CS-515
 
 ## Key Features
 1. **Volume Analysis Comparison**
