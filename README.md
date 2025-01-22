@@ -3,6 +3,15 @@
 ## Short Description
 A comprehensive social media analysis platform analyzing political discourse during the 2024 U.S. Presidential Election by collecting and processing over 4.6 million 4chan posts and 1.2 million Reddit comments. Features real-time sentiment analysis, toxicity tracking, and interactive visualizations through a web dashboard.
 
+## Technologies Used
+- **Python**: Primary programming language for data collection, processing, and analysis
+- **MongoDB**: NoSQL database for storing and querying large volumes of social media data
+- **Linux**: Operating system for hosting the project and running various components
+- **Docker**: Containerization platform for easy deployment and management of services
+- **Faktory**: Background job scheduling system for efficient task management
+- **Plotly.js**: JavaScript library for creating interactive and dynamic visualizations
+- **Flask**: Python web framework for building the dashboard and handling server-side logic
+
 ## Project Overview
 This project evolved through three phases:
 1. Data Collection Pipeline Development
@@ -62,7 +71,7 @@ This project evolved through three phases:
    - Comparative platform behavior during political events
    - Moderation effectiveness analysis
    - Evolution of discussion themes over time
-     
+
 ## Technical Implementation
 
 ### Data Collection Infrastructure
@@ -94,6 +103,10 @@ This project evolved through three phases:
 - **Word Frequency:** Dynamic topic tracking
 
 ## Setup Instructions
+
+### Prerequisites
+- Docker installed and running
+- Python environment with required dependencies
 
 ### 1. Start Required Services
 
