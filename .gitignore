@@ -1,0 +1,9 @@
+.venv/
+.vscode/
+env/
+Plotting/
+Project_2/
+*.pyc
+__pycache__/
+website/logs/
+*.log

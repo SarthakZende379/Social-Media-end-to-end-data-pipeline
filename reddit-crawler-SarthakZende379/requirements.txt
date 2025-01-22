@@ -1,0 +1,9 @@
+pyfaktory==0.2.6
+python-dotenv~=1.0
+requests==2.31.0
+pymongo==4.5.0
+matplotlib~=3.7
+seaborn~=0.12
+pandas~=1.5
+psutil==5.9.4
+tqdm==4.65.0

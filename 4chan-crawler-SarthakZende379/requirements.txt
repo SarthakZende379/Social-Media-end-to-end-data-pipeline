@@ -1,0 +1,8 @@
+###### Requirements with Version Specifiers ######
+pyfaktory
+python-dotenv ~= 1.0
+requests ~= 2.32
+pymongo ~= 4.5
+matplotlib ~= 3.7
+seaborn ~= 0.12
+pandas ~= 1.5

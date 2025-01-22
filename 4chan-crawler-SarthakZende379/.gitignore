@@ -1,0 +1,4 @@
+.DS_Store
+.env
+env
+.ruff_cache

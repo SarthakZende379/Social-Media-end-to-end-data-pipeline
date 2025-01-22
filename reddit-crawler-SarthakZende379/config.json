@@ -1,0 +1,46 @@
+{
+    "reddit": {
+        "client_id": "VVyD1IaPlYOb3tRW2zNezg",
+        "client_secret": "XPOABLIaOWHwAceGPqZTGG-EDWF-Jw",
+        "username": "Foreign_Pack_7949",
+        "password": "WsQK-.ZANyK4J.K",
+        "user_agent": "python:social_media_pipeline:v1.0 (by /u/Foreign_Pack_7949)"
+    },
+    "subreddits": [
+        "politics"
+    ],
+    "moderate_hatespeech": {
+        "api_token": "a494cf6fd08b41a49bb7f36650d209db",
+        "batch_size": 100,
+        "max_retries": 3
+    },
+    "mongodb": {
+        "uri": "mongodb://localhost:27017/",
+        "database": "reddit_crawler",
+        "collections": {
+            "posts": "reddit_posts",
+            "comments": "reddit_comments",
+            "failed_posts": "failed_posts",
+            "failed_comments": "failed_comments"
+        }
+    },
+    "faktory": {
+        "url": "tcp://faktory:password@localhost:7419",
+        "queues": {
+            "subreddit": "reddit-crawl-subreddit",
+            "comments": "reddit-crawl-comments",
+            "retry": "reddit-retry-queue",
+            "comments_retry": "reddit-comments-retry-queue",
+            "toxicity": "toxicity-analysis"
+        }
+    },
+    "crawl_settings": {
+        "post_limit": 1000,
+        "subreddit_interval_minutes": 15,
+        "retry_interval_minutes": 5,
+        "max_retry_attempts": 3,
+        "retry_batch_size": 50,
+        "comment_retry_batch_size": 50,
+        "rate_limit_buffer": 10
+    }
+}
